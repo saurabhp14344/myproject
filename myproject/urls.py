@@ -23,12 +23,7 @@ from core import views as core_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('login/', home.login, name='login'),
-    #path('logout/', home.logout, name='logout'),
     path('', home.homepage, name='homepage'),
-    #path('register/', home.register, name='register'),
-    #path('accounts/', include('django.contrib.auth.urls')),
-    path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('login/', home.login_user, name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('signup/', core_views.signup, name='signup'),
