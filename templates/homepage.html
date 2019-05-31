@@ -1,3 +1,4 @@
+<head>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -5,6 +6,10 @@
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+  {% comment %}<meta charset="utf-8">
+  <title>{% block title %}Django Auth Tutorial{% endblock %}</title>{% endcomment %}
+
+</head>
 <div class="top ">
 <div class="container">
 	<div class="row">
@@ -21,6 +26,7 @@
 	</div>
 </div>
 </div>
+
 <div class="top-head pt-1 border">
 <div class="container">
 	<div class="row ">
@@ -29,13 +35,25 @@
 		    <a href="#"><li class="list-inline-item" style="text-decoration:underline" ><small> Check On Road Price</small></li></a>
 		    <a href="#"><li class="list-inline-item" style="text-decoration:underline; padding-left: 10px;"><small> Feedback</small></li></a>
 		    <a href="#"><li class="list-inline-item" style="text-decoration:underline; padding-left: 10px;"><small> Ask a Question</small></li></a>
-		    <a href="#"><li class="list-inline-item" style="text-decoration:underline; padding-left: 10px;"><small><i class="fa fa-user"></i> Welcome User!</small></li></a>
-            <a href="#"><li class="list-inline-item" style="text-decoration:underline; padding-left: 10px;"><small> Logout </small></li></a>
+
+
+                {% block content %}
+{% if user.is_authenticated %}
+    <li class="list-inline-item" style="text-decoration:underline; padding-left: 10px;"><small><i class="fa fa-user"></i>
+  Welcome {{ user.username }}!
+  <a href="{% url 'logout' %}?next={% url 'homepage' %}"> logout</a>
+{% else %}
+  <a href="{% url 'login' %}"><small>login</small></a>
+{% endif %}
+
+
+            </small></li>
 		</ul>
 	  </div>
 	</div>
 </div>
 </div>
+{% endblock %}
 <nav class="navbar navbar-expand-sm  bg-light border ">
   <div class="container">
   <!-- Brand -->
